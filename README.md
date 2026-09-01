@@ -1,1400 +1,578 @@
-**# Recovr — AI-Powered Revenue Recovery System**
+# Recovr — AI Revenue Recovery System
 
+> An AI-powered payment failure detection and intelligent revenue recovery platform that analyzes failed payments, predicts recovery probability, evaluates customer behavior, and recommends the most suitable recovery action.
 
+## 🚀 Overview
 
-**> An intelligent payment recovery platform that detects failed payments, analyzes customer behavior, predicts recovery probability, and recommends the most effective recovery action.**
+**Recovr** is an intelligent revenue recovery system designed to help businesses recover failed payments through data-driven decision making.
 
+Instead of applying the same recovery strategy to every failed payment, Recovr evaluates multiple factors such as:
 
+* Payment failure reason
+* Customer payment history
+* Customer reliability
+* Payment attempts
+* Subscription information
+* Recovery probability
+* Recovery score
+* Retry limits
+* Policy rules
 
-**## 🚀 Overview**
+The system then determines the most appropriate recovery strategy, such as:
 
+* 🔄 Retry the payment
+* 💳 Generate a payment link
+* 📞 Contact the customer
+* ⚠️ Escalate for manual review
+* ✓ Take no action
 
+---
 
-**\*\*Recovr\*\* is an AI-powered revenue recovery system designed to help businesses recover revenue lost due to failed payments.**
+## 🎯 Problem Statement
 
+Failed payments can lead to significant revenue loss for businesses.
 
+A traditional payment recovery system may repeatedly retry failed payments without considering:
 
-**Instead of treating every failed payment in the same way, Recovr analyzes multiple signals including payment failure reasons, customer payment history, subscription information, previous payment attempts, and recovery history.**
+* Why the payment failed
+* How valuable the customer is
+* Previous payment behavior
+* Number of previous attempts
+* Probability of successful recovery
+* Business recovery policies
 
+Recovr addresses this problem by combining **Machine Learning, customer intelligence, rule-based policy decisions, and automated recovery actions** into a single workflow.
 
+---
 
-**The system then:**
+## ✨ Key Features
 
+### 🤖 AI-Powered Recovery Prediction
 
+The system uses a Machine Learning model to estimate the probability that a failed payment can be successfully recovered.
 
-**1. Detects payment failures**
+Example:
 
-**2. Analyzes customer behavior**
+```text
+Recovery Probability: 27%
+Predicted Success: No
+Risk Level: High
+```
 
-**3. Predicts recovery probability using Machine Learning**
+### 👤 Customer Intelligence
 
-**4. Calculates a recovery priority score**
+Recovr analyzes customer payment behavior and generates insights including:
 
-**5. Recommends an intelligent recovery action**
+* Customer value
+* Reliability
+* Total payments
+* Successful payments
+* Failed payments
+* Success rate
+* Subscription plan
 
-**6. Validates the action through a policy engine**
+### 📊 Recovery Scoring
 
-**7. Executes the approved recovery action**
+Each failed payment receives a recovery score that helps prioritize recovery efforts.
 
-**8. Stores the recovery activity for future analysis**
+Example:
 
+```text
+Recovery Score: 70
+Priority: HIGH
+```
+
+### 🧠 Intelligent Recovery Engine
+
+The recovery engine evaluates the payment context and recommends the most appropriate action.
 
+Example:
 
-**---**
+```text
+Recommended Action: Send Payment Link
+Reason: Retry limit reached for insufficient funds
+Confidence: 92%
+```
+
+### 🛡️ Policy Engine
+
+Before executing an action, the system checks whether the recommended action is allowed by the configured recovery policies.
+
+```text
+Decision: ALLOWED
+```
+
+This provides an additional control layer between AI recommendations and action execution.
+
+### ⚡ Recovery Action Executor
+
+Approved recovery actions can be executed through the action executor.
+
+Currently supported recovery simulations include:
+
+* Payment link generation
+* Payment retry simulation
+* Manual escalation
+* Unknown-action handling
+* Policy-blocked actions
+
+### 📜 Recovery History
+
+Every recovery action is persisted and can be viewed through the Recovery History section.
+
+The system records:
+
+* Action type
+* Confidence
+* Policy decision
+* Execution status
+* Outcome
+* Timestamp
+
+---
+
+# 🏗️ System Architecture
+
+```text
+                    ┌───────────────────────┐
+                    │     React Frontend    │
+                    │       Dashboard       │
+                    └───────────┬───────────┘
+                                │
+                                ▼
+                    ┌───────────────────────┐
+                    │      FastAPI API      │
+                    │       Backend         │
+                    └───────────┬───────────┘
+                                │
+             ┌──────────────────┼──────────────────┐
+             │                  │                  │
+             ▼                  ▼                  ▼
+      Failure Detector    ML Prediction    Customer Intelligence
+             │                  │                  │
+             └──────────────────┼──────────────────┘
+                                ▼
+                    ┌───────────────────────┐
+                    │   Recovery Scoring    │
+                    │        Engine         │
+                    └───────────┬───────────┘
+                                │
+                                ▼
+                    ┌───────────────────────┐
+                    │   Recovery Engine     │
+                    │ Recommendation Logic  │
+                    └───────────┬───────────┘
+                                │
+                                ▼
+                    ┌───────────────────────┐
+                    │    Policy Engine      │
+                    │  Allow / Block Action │
+                    └───────────┬───────────┘
+                                │
+                                ▼
+                    ┌───────────────────────┐
+                    │   Action Executor     │
+                    │ Recovery Execution    │
+                    └───────────┬───────────┘
+                                │
+                                ▼
+                    ┌───────────────────────┐
+                    │      PostgreSQL       │
+                    │       Database        │
+                    └───────────────────────┘
+```
+
+---
+
+# 🔄 Recovery Workflow
+
+```text
+Failed Payment
+      │
+      ▼
+Failure Detection
+      │
+      ▼
+Customer Intelligence
+      │
+      ▼
+ML Recovery Prediction
+      │
+      ▼
+Recovery Score
+      │
+      ▼
+Recovery Recommendation
+      │
+      ▼
+Policy Validation
+      │
+      ├── BLOCKED ──► No Action
+      │
+      ▼
+Action Executor
+      │
+      ▼
+Recovery Result
+      │
+      ▼
+Recovery History
+```
+
+---
+
+# 🛠️ Tech Stack
+
+## Backend
+
+* Python
+* FastAPI
+* SQLAlchemy
+* PostgreSQL
+* Uvicorn
+
+## Machine Learning
+
+* Scikit-learn
+* Pandas
+* NumPy
+* Joblib
+* Machine Learning classification model
+
+## Frontend
+
+* React
+* JavaScript
+* Vite
+* HTML
+* CSS
+
+## Development
+
+* Git
+* GitHub
+* VS Code
+* REST APIs
+
+---
+
+# 📂 Project Structure
+
+```text
+recovr-ai-revenue-recovery/
+│
+├── backend/
+│   ├── app/
+│   │   ├── ml/
+│   │   │   ├── feature_engineering.py
+│   │   │   ├── predictor.py
+│   │   │   ├── train_model.py
+│   │   │   ├── training_data.csv
+│   │   │   └── recovery_model.pkl
+│   │   │
+│   │   ├── models/
+│   │   │   ├── customer.py
+│   │   │   ├── payment.py
+│   │   │   ├── payment_attempt.py
+│   │   │   ├── recovery_action.py
+│   │   │   └── subscription.py
+│   │   │
+│   │   ├── routes/
+│   │   │   └── payments.py
+│   │   │
+│   │   ├── services/
+│   │   │   ├── action_executor.py
+│   │   │   ├── ai_agent.py
+│   │   │   ├── customer_intelligence.py
+│   │   │   ├── failure_detector.py
+│   │   │   ├── policy_engine.py
+│   │   │   ├── recovery_engine.py
+│   │   │   └── scoring_engine.py
+│   │   │
+│   │   ├── database.py
+│   │   └── main.py
+│   │
+│   └── requirements.txt
+│
+├── frontend/
+│   ├── src/
+│   │   ├── App.jsx
+│   │   ├── App.css
+│   │   ├── Payments.jsx
+│   │   └── main.jsx
+│   │
+│   ├── package.json
+│   └── vite.config.js
+│
+├── .gitignore
+└── README.md
+```
+
+---
+
+# 🔌 API Endpoints
+
+| Method | Endpoint                                  | Description                  |
+| ------ | ----------------------------------------- | ---------------------------- |
+| GET    | `/payments/`                              | Get all payments             |
+| GET    | `/payments/{payment_id}`                  | Get a single payment         |
+| GET    | `/payments/{payment_id}/context`          | Get complete payment context |
+| POST   | `/payments/{payment_id}/analyze`          | Analyze payment recovery     |
+| POST   | `/payments/{payment_id}/recover`          | Execute recommended recovery |
+| GET    | `/payments/{payment_id}/recovery-history` | Get recovery history         |
+
+---
+
+# ⚙️ Local Setup
+
+## 1. Clone the repository
+
+```bash
+git clone https://github.com/13swati/recovr-ai-revenue-recovery.git
+cd recovr-ai-revenue-recovery
+```
+
+## 2. Backend Setup
+
+Create a virtual environment:
+
+```bash
+python -m venv .venv
+```
+
+Activate it on Windows:
+
+```powershell
+.venv\Scripts\activate
+```
+
+Install dependencies:
+
+```bash
+pip install -r backend/requirements.txt
+```
+
+## 3. Configure PostgreSQL
+
+Create a PostgreSQL database and configure the database connection used by the backend.
+
+Keep credentials and secrets in environment variables rather than committing them to GitHub.
+
+## 4. Start FastAPI
+
+Navigate to the application directory:
+
+```powershell
+cd backend/app
+```
+
+Run:
+
+```powershell
+uvicorn main:app --reload
+```
+
+The backend will be available at:
+
+```text
+http://127.0.0.1:8000
+```
+
+FastAPI documentation:
+
+```text
+http://127.0.0.1:8000/docs
+```
+
+## 5. Start Frontend
+
+Open another terminal:
+
+```powershell
+cd frontend
+```
+
+Install dependencies:
+
+```powershell
+npm install
+```
+
+Start the development server:
+
+```powershell
+npm run dev
+```
+
+---
+
+# 🖥️ Application
+
+The dashboard provides several sections:
+
+### 📊 Dashboard
+
+Provides an overview of:
+
+* Total payments
+* Recovery probability
+* Recovery score
+* Risk level
+* Quick payment analysis
+
+### 💳 Payments
+
+Displays payment information and allows failed payments to be analyzed.
+
+### 👥 Customers
+
+Provides customer-level payment intelligence including:
+
+* Payment history
+* Success rate
+* Customer value
+* Risk classification
+
+### 🤖 AI Recovery
+
+Displays:
+
+* ML prediction
+* Recovery probability
+* Risk level
+* Recovery score
+* Recommended action
+* Recommendation confidence
+* Customer intelligence
+* Policy decision
+* Execution result
 
+### 📜 Recovery History
 
+Tracks previously executed recovery actions.
 
-**## 🎯 Problem Statement**
+---
 
+# 🧪 Example Recovery Decision
 
+For a failed payment:
 
-**Failed payments can result in significant revenue loss for businesses.**
+```text
+Payment ID: 6
+Amount: ₹2,499
+Failure Reason: Insufficient Funds
 
+Recovery Probability: 27%
+Risk Level: HIGH
+Recovery Score: 70
+Priority: HIGH
 
+Recommended Action:
+Send Payment Link
 
-**A simple retry-based system may not be effective because different payment failures require different recovery strategies.**
+Confidence: 92%
 
+Policy Decision:
+ALLOWED
 
+Execution:
+Payment link generated
+```
 
-**For example:**
+This demonstrates how Recovr combines ML predictions with business rules and customer intelligence instead of relying on a simple retry mechanism.
 
+---
 
+# 🔮 Future Scope
 
-**\* Insufficient funds → Send a payment link**
+The current version provides the foundation for an intelligent payment recovery platform. Future improvements could include:
 
-**\* Temporary payment failure → Retry payment**
+### 💳 Real Payment Gateway Integration
 
-**\* Repeated failures → Contact or escalate to customer support**
+Integrate payment providers such as Razorpay or Stripe to perform real payment retries and payment-link generation.
 
-**\* Successful payment → No recovery action required**
+### 📧 Automated Customer Communication
 
+Automatically send recovery messages through:
 
+* Email
+* SMS
+* WhatsApp
+* Push notifications
 
-**Recovr attempts to make this process intelligent by selecting a recovery strategy based on payment and customer context.**
+### 🧠 Advanced Machine Learning
 
+Improve prediction accuracy using larger real-world datasets and features such as:
 
+* Customer lifetime value
+* Historical recovery success
+* Payment method behavior
+* Time since failure
+* Retry response patterns
+* Customer engagement
 
-**---**
+### 🔁 Adaptive Recovery Strategies
 
+Allow the system to learn which recovery strategy works best for each customer segment.
 
+### 📈 Analytics Dashboard
 
-**## ✨ Key Features**
+Add business-level analytics such as:
 
+* Revenue recovered
+* Recovery rate
+* Revenue at risk
+* Recovery performance by strategy
+* Customer segment analysis
 
+### 🔐 Authentication and Authorization
 
-**### 💳 Payment Failure Detection**
+Add secure authentication with role-based access for administrators, finance teams, and support teams.
 
+### ☁️ Cloud Deployment
 
+Deploy the application using cloud infrastructure with:
 
-**Automatically identifies whether a payment requires recovery and determines the failure reason.**
+* Docker
+* CI/CD
+* Managed PostgreSQL
+* Cloud hosting
+* Monitoring and logging
 
+### 🤖 AI Agent Integration
 
+Extend the AI recovery engine into an autonomous recovery agent capable of selecting and executing recovery strategies while respecting business policies.
 
-**### 🤖 Machine Learning Prediction**
+---
 
+# 🎓 Project Objective
 
+Recovr demonstrates the practical integration of:
 
-**Predicts the probability that a failed payment can be successfully recovered.**
+**Machine Learning + Backend APIs + Database Systems + Business Rules + Customer Intelligence + React UI**
 
+The project was developed to explore how AI can be applied to a real-world fintech problem: **recovering revenue from failed payments intelligently.**
 
+---
 
-**Example:**
+# 👩‍💻 Author
 
+**Swati Gupta**
 
+B.Tech — Information Technology
 
-**```text**
+GitHub: [13swati](https://github.com/13swati)
 
-**Recovery Probability: 27%**
+---
 
-**Predicted Success: No**
+## 📌 Project Status
 
-**Risk Level: HIGH**
+🚧 **Active Development**
 
-**```**
+The core payment recovery workflow is implemented. Future development will focus on improving ML intelligence, real payment integrations, automated customer communication, analytics, security, and cloud deployment.
 
+---
 
+## ⭐ If you find this project useful
 
-**### 👤 Customer Intelligence**
-
-
-
-**Analyzes customer payment behavior including:**
-
-
-
-**\* Total payments**
-
-**\* Successful payments**
-
-**\* Failed payments**
-
-**\* Success rate**
-
-**\* Customer value**
-
-**\* Reliability**
-
-**\* Subscription plan**
-
-
-
-**### 📊 Recovery Scoring**
-
-
-
-**Calculates a recovery score and priority level to help determine which failed payments deserve attention first.**
-
-
-
-**### 🎯 Intelligent Recovery Recommendation**
-
-
-
-**The Recovery Engine recommends an action based on the available payment and customer context.**
-
-
-
-**Supported recovery strategies include:**
-
-
-
-**```text**
-
-**Retry Payment**
-
-**Send Payment Link**
-
-**Contact Customer**
-
-**Escalate**
-
-**No Action**
-
-**```**
-
-
-
-**### 🛡️ Policy Engine**
-
-
-
-**Before executing an action, Recovr validates whether the recommended action is allowed according to the current recovery policy.**
-
-
-
-**### ⚡ Action Executor**
-
-
-
-**Executes approved recovery actions.**
-
-
-
-**Currently implemented actions include:**
-
-
-
-**\* Payment link generation**
-
-**\* Payment retry simulation**
-
-**\* Manual escalation**
-
-
-
-**### 📜 Recovery History**
-
-
-
-**Every recovery action is recorded and can be viewed through the Recovery History dashboard.**
-
-
-
-**### 👥 Customer Risk Analysis**
-
-
-
-**Customers are categorized according to their payment behavior and recovery risk.**
-
-
-
-**---**
-
-
-
-**# 🏗️ System Architecture**
-
-
-
-**```text**
-
-&#x20;                   **┌─────────────────────────┐**
-
-&#x20;                   **│      React Frontend     │**
-
-&#x20;                   **│     Recovr Dashboard    │**
-
-&#x20;                   **└────────────┬────────────┘**
-
-&#x20;                                **│**
-
-&#x20;                                **│ REST API**
-
-&#x20;                                **▼**
-
-&#x20;                   **┌─────────────────────────┐**
-
-&#x20;                   **│     FastAPI Backend     │**
-
-&#x20;                   **└────────────┬────────────┘**
-
-&#x20;                                **│**
-
-&#x20;            **┌───────────────────┼───────────────────┐**
-
-&#x20;            **│                   │                   │**
-
-&#x20;            **▼                   ▼                   ▼**
-
-&#x20;     **┌─────────────┐    ┌───────────────┐   ┌──────────────┐**
-
-&#x20;     **│   Failure   │    │   Customer    │   │ ML Predictor │**
-
-&#x20;     **│  Detection  │    │ Intelligence  │   │              │**
-
-&#x20;     **└──────┬──────┘    └───────┬───────┘   └──────┬───────┘**
-
-&#x20;            **│                   │                  │**
-
-&#x20;            **└───────────────────┼──────────────────┘**
-
-&#x20;                                **▼**
-
-&#x20;                   **┌─────────────────────────┐**
-
-&#x20;                   **│    Recovery Scoring    │**
-
-&#x20;                   **└────────────┬────────────┘**
-
-&#x20;                                **▼**
-
-&#x20;                   **┌─────────────────────────┐**
-
-&#x20;                   **│    Recovery Engine      │**
-
-&#x20;                   **│ Action Recommendation  │**
-
-&#x20;                   **└────────────┬────────────┘**
-
-&#x20;                                **▼**
-
-&#x20;                   **┌─────────────────────────┐**
-
-&#x20;                   **│     Policy Engine       │**
-
-&#x20;                   **│   Validate Action       │**
-
-&#x20;                   **└────────────┬────────────┘**
-
-&#x20;                                **▼**
-
-&#x20;                   **┌─────────────────────────┐**
-
-&#x20;                   **│    Action Executor      │**
-
-&#x20;                   **└────────────┬────────────┘**
-
-&#x20;                                **▼**
-
-&#x20;                   **┌─────────────────────────┐**
-
-&#x20;                   **│       PostgreSQL        │**
-
-&#x20;                   **│     Recovery History   │**
-
-&#x20;                   **└─────────────────────────┘**
-
-**```**
-
-
-
-**---**
-
-
-
-**# 🤖 AI / ML Workflow**
-
-
-
-**Recovr follows an end-to-end recovery decision pipeline:**
-
-
-
-**```text**
-
-**Failed Payment**
-
-&#x20;     **│**
-
-&#x20;     **▼**
-
-**Failure Detection**
-
-&#x20;     **│**
-
-&#x20;     **▼**
-
-**Customer Intelligence**
-
-&#x20;     **│**
-
-&#x20;     **▼**
-
-**Feature Engineering**
-
-&#x20;     **│**
-
-&#x20;     **▼**
-
-**ML Recovery Prediction**
-
-&#x20;     **│**
-
-&#x20;     **▼**
-
-**Recovery Score**
-
-&#x20;     **│**
-
-&#x20;     **▼**
-
-**Recovery Recommendation**
-
-&#x20;     **│**
-
-&#x20;     **▼**
-
-**Policy Validation**
-
-&#x20;     **│**
-
-&#x20;     **▼**
-
-**Action Execution**
-
-&#x20;     **│**
-
-&#x20;     **▼**
-
-**Recovery History**
-
-**```**
-
-
-
-**---**
-
-
-
-**# 🧠 Example AI Decision**
-
-
-
-**Consider a failed payment:**
-
-
-
-**```text**
-
-**Payment ID: 6**
-
-**Customer ID: 1**
-
-**Amount: ₹2,499**
-
-
-
-**Failure Reason:**
-
-**insufficient\_funds**
-
-**```**
-
-
-
-**The system analyzes the payment and generates:**
-
-
-
-**```text**
-
-**Recovery Probability: 27%**
-
-**Risk Level: HIGH**
-
-**Recovery Score: 70**
-
-**Priority: HIGH**
-
-**```**
-
-
-
-**The Recovery Engine determines:**
-
-
-
-**```text**
-
-**Recommended Action:**
-
-**Send Payment Link**
-
-
-
-**Reason:**
-
-**Retry limit reached for insufficient funds**
-
-
-
-**Confidence:**
-
-**92%**
-
-**```**
-
-
-
-**The Policy Engine evaluates the action:**
-
-
-
-**```text**
-
-**Policy Decision:**
-
-**ALLOWED**
-
-**```**
-
-
-
-**The Action Executor then generates a payment recovery link.**
-
-
-
-**```text**
-
-**Action:**
-
-**payment\_link**
-
-
-
-**Status:**
-
-**completed**
-
-
-
-**Message:**
-
-**Payment link generated**
-
-**```**
-
-
-
-**Finally, the recovery action is stored in the PostgreSQL database.**
-
-
-
-**---**
-
-
-
-**# 🛠️ Technology Stack**
-
-
-
-**## Backend**
-
-
-
-**\* Python**
-
-**\* FastAPI**
-
-**\* SQLAlchemy**
-
-**\* PostgreSQL**
-
-**\* Uvicorn**
-
-**\* Scikit-learn**
-
-**\* NumPy**
-
-**\* Pandas**
-
-
-
-**## Frontend**
-
-
-
-**\* React**
-
-**\* JavaScript**
-
-**\* Vite**
-
-**\* HTML**
-
-**\* CSS**
-
-
-
-**## Machine Learning**
-
-
-
-**\* Scikit-learn**
-
-**\* Feature Engineering**
-
-**\* Classification / Recovery Prediction**
-
-**\* Probability-based recovery scoring**
-
-
-
-**## Database**
-
-
-
-**\* PostgreSQL**
-
-**\* SQLAlchemy ORM**
-
-
-
-**---**
-
-
-
-**# 📁 Project Structure**
-
-
-
-**```text**
-
-**recovr-ai-revenue-recovery/**
-
-**│**
-
-**├── backend/**
-
-**│   ├── app/**
-
-**│   │   ├── ml/**
-
-**│   │   │   ├── feature\_engineering.py**
-
-**│   │   │   ├── predictor.py**
-
-**│   │   │   ├── train\_model.py**
-
-**│   │   │   └── recovery\_model.pkl**
-
-**│   │   │**
-
-**│   │   ├── models/**
-
-**│   │   │   ├── customer.py**
-
-**│   │   │   ├── payment.py**
-
-**│   │   │   ├── payment\_attempt.py**
-
-**│   │   │   ├── recovery\_action.py**
-
-**│   │   │   └── subscription.py**
-
-**│   │   │**
-
-**│   │   ├── routes/**
-
-**│   │   │   └── payments.py**
-
-**│   │   │**
-
-**│   │   ├── services/**
-
-**│   │   │   ├── action\_executor.py**
-
-**│   │   │   ├── ai\_agent.py**
-
-**│   │   │   ├── customer\_intelligence.py**
-
-**│   │   │   ├── failure\_detector.py**
-
-**│   │   │   ├── policy\_engine.py**
-
-**│   │   │   ├── recovery\_engine.py**
-
-**│   │   │   └── scoring\_engine.py**
-
-**│   │   │**
-
-**│   │   ├── database.py**
-
-**│   │   └── main.py**
-
-**│   │**
-
-**│   └── .gitignore**
-
-**│**
-
-**├── frontend/**
-
-**│   ├── src/**
-
-**│   │   ├── App.jsx**
-
-**│   │   ├── App.css**
-
-**│   │   ├── Payments.jsx**
-
-**│   │   └── main.jsx**
-
-**│   │**
-
-**│   ├── public/**
-
-**│   ├── package.json**
-
-**│   └── vite.config.js**
-
-**│**
-
-**├── .gitignore**
-
-**└── README.md**
-
-**```**
-
-
-
-**---**
-
-
-
-**# 🔌 API Endpoints**
-
-
-
-**## Payments**
-
-
-
-**### Get all payments**
-
-
-
-**```http**
-
-**GET /payments/**
-
-**```**
-
-
-
-**### Get a single payment**
-
-
-
-**```http**
-
-**GET /payments/{payment\_id}**
-
-**```**
-
-
-
-**### Get payment context**
-
-
-
-**```http**
-
-**GET /payments/{payment\_id}/context**
-
-**```**
-
-
-
-**### Analyze payment**
-
-
-
-**```http**
-
-**POST /payments/{payment\_id}/analyze**
-
-**```**
-
-
-
-**### Execute recovery**
-
-
-
-**```http**
-
-**POST /payments/{payment\_id}/recover**
-
-**```**
-
-
-
-**### Get recovery history**
-
-
-
-**```http**
-
-**GET /payments/{payment\_id}/recovery-history**
-
-**```**
-
-
-
-**---**
-
-
-
-**# ⚙️ Installation**
-
-
-
-**## 1. Clone the repository**
-
-
-
-**```bash**
-
-**git clone https://github.com/13swati/recovr-ai-revenue-recovery.git**
-
-**cd recovr-ai-revenue-recovery**
-
-**```**
-
-
-
-**---**
-
-
-
-**# 🐍 Backend Setup**
-
-
-
-**Navigate to the backend:**
-
-
-
-**```bash**
-
-**cd backend**
-
-**```**
-
-
-
-**Create a virtual environment:**
-
-
-
-**```bash**
-
-**python -m venv .venv**
-
-**```**
-
-
-
-**Activate it on Windows:**
-
-
-
-**```powershell**
-
-**.venv\\Scripts\\activate**
-
-**```**
-
-
-
-**Install dependencies:**
-
-
-
-**```bash**
-
-**pip install fastapi uvicorn sqlalchemy psycopg2-binary pandas numpy scikit-learn**
-
-**```**
-
-
-
-**Configure your PostgreSQL database and update the database connection through environment variables.**
-
-
-
-**Start the FastAPI server:**
-
-
-
-**```bash**
-
-**cd app**
-
-**uvicorn main:app --reload**
-
-**```**
-
-
-
-**The backend will run at:**
-
-
-
-**```text**
-
-**http://127.0.0.1:8000**
-
-**```**
-
-
-
-**FastAPI documentation:**
-
-
-
-**```text**
-
-**http://127.0.0.1:8000/docs**
-
-**```**
-
-
-
-**---**
-
-
-
-**# ⚛️ Frontend Setup**
-
-
-
-**Open another terminal and navigate to:**
-
-
-
-**```bash**
-
-**cd frontend**
-
-**```**
-
-
-
-**Install dependencies:**
-
-
-
-**```bash**
-
-**npm install**
-
-**```**
-
-
-
-**Start the development server:**
-
-
-
-**```bash**
-
-**npm run dev**
-
-**```**
-
-
-
-**The frontend will normally be available at:**
-
-
-
-**```text**
-
-**http://localhost:5173**
-
-**```**
-
-
-
-**---**
-
-
-
-**# 🔐 Environment Variables**
-
-
-
-**Sensitive configuration should be stored in `.env` files and should \*\*never be committed to GitHub\*\*.**
-
-
-
-**Example:**
-
-
-
-**```env**
-
-**DATABASE\_URL=postgresql://username:password@localhost:5432/recovr**
-
-**```**
-
-
-
-**The repository `.gitignore` is configured to prevent `.env` files from being committed.**
-
-
-
-**---**
-
-
-
-**# 📊 Dashboard**
-
-
-
-**The Recovr dashboard provides an overview of:**
-
-
-
-**\* Total payments**
-
-**\* Recovery probability**
-
-**\* Recovery score**
-
-**\* Risk level**
-
-**\* Customer intelligence**
-
-**\* Recommended recovery actions**
-
-**\* Recovery history**
-
-
-
-**The AI Recovery page provides detailed information about the selected failed payment.**
-
-
-
-**---**
-
-
-
-**# 🔄 Recovery Decision Logic**
-
-
-
-**The current system follows this general decision flow:**
-
-
-
-**```text**
-
-**Payment Failed**
-
-&#x20;     **│**
-
-&#x20;     **▼**
-
-**Is Recovery Required?**
-
-&#x20;     **│**
-
-&#x20;     **├── No ──► Stop**
-
-&#x20;     **│**
-
-&#x20;     **▼**
-
-**Customer Analysis**
-
-&#x20;     **│**
-
-&#x20;     **▼**
-
-**ML Prediction**
-
-&#x20;     **│**
-
-&#x20;     **▼**
-
-**Recovery Score**
-
-&#x20;     **│**
-
-&#x20;     **▼**
-
-**Recommended Action**
-
-&#x20;     **│**
-
-&#x20;     **▼**
-
-**Policy Validation**
-
-&#x20;     **│**
-
-&#x20;     **├── Blocked ──► Do Not Execute**
-
-&#x20;     **│**
-
-&#x20;     **▼**
-
-**Execute Action**
-
-&#x20;     **│**
-
-&#x20;     **▼**
-
-**Store Recovery Action**
-
-**```**
-
-
-
-**---**
-
-
-
-**# 🚧 Current Implementation Status**
-
-
-
-**### Completed**
-
-
-
-**\* \[x] FastAPI backend**
-
-**\* \[x] React frontend**
-
-**\* \[x] PostgreSQL integration**
-
-**\* \[x] SQLAlchemy database models**
-
-**\* \[x] Payment failure detection**
-
-**\* \[x] Customer intelligence**
-
-**\* \[x] ML recovery prediction**
-
-**\* \[x] Recovery scoring**
-
-**\* \[x] Intelligent recovery recommendation**
-
-**\* \[x] Policy validation**
-
-**\* \[x] Recovery action execution**
-
-**\* \[x] Payment-link generation**
-
-**\* \[x] Recovery history**
-
-**\* \[x] Customer risk dashboard**
-
-**\* \[x] GitHub repository**
-
-
-
-**### Currently Improving**
-
-
-
-**\* \[ ] Production-grade payment provider integration**
-
-**\* \[ ] More realistic ML training data**
-
-**\* \[ ] Improved ML evaluation metrics**
-
-**\* \[ ] Automated recovery campaigns**
-
-**\* \[ ] Customer communication system**
-
-**\* \[ ] Advanced analytics**
-
-**\* \[ ] Production deployment**
-
-**\* \[ ] Authentication and authorization**
-
-
-
-**---**
-
-
-
-**# 🔮 Future Scope**
-
-
-
-**## 1. Real Payment Gateway Integration**
-
-
-
-**Integrate real payment providers such as Stripe or Razorpay to perform actual payment retries and recovery operations instead of simulated actions.**
-
-
-
-**## 2. Automated Customer Communication**
-
-
-
-**Automatically send:**
-
-
-
-**\* Email reminders**
-
-**\* SMS notifications**
-
-**\* WhatsApp messages**
-
-**\* Payment links**
-
-
-
-**based on the recommended recovery strategy.**
-
-
-
-**## 3. Advanced Machine Learning**
-
-
-
-**Improve the prediction model using larger real-world datasets and features such as:**
-
-
-
-**\* Historical recovery success**
-
-**\* Customer lifetime value**
-
-**\* Payment method**
-
-**\* Failure frequency**
-
-**\* Time since previous payment**
-
-**\* Subscription history**
-
-**\* Customer engagement**
-
-
-
-**## 4. Adaptive Recovery Strategies**
-
-
-
-**The system could learn which recovery strategy works best for each customer segment.**
-
-
-
-**For example:**
-
-
-
-**```text**
-
-**Customer Segment A**
-
-**→ Retry**
-
-
-
-**Customer Segment B**
-
-**→ Payment Link**
-
-
-
-**Customer Segment C**
-
-**→ Customer Contact**
-
-
-
-**Customer Segment D**
-
-**→ Manual Escalation**
-
-**```**
-
-
-
-**## 5. Real-Time Recovery**
-
-
-
-**Introduce event-driven processing so failed payments can automatically enter the recovery pipeline without requiring manual analysis.**
-
-
-
-**## 6. Recovery Analytics**
-
-
-
-**Add analytics such as:**
-
-
-
-**\* Revenue recovered**
-
-**\* Recovery rate**
-
-**\* Failed payment rate**
-
-**\* Recovery success by strategy**
-
-**\* Customer lifetime value**
-
-**\* Recovery ROI**
-
-
-
-**## 7. Authentication and Role-Based Access**
-
-
-
-**Introduce secure authentication for:**
-
-
-
-**\* Admins**
-
-**\* Finance teams**
-
-**\* Support teams**
-
-**\* Recovery managers**
-
-
-
-**## 8. Production Deployment**
-
-
-
-**Deploy the platform using cloud infrastructure and containerization.**
-
-
-
-**Potential technologies:**
-
-
-
-**```text**
-
-**Docker**
-
-**AWS / Azure / GCP**
-
-**PostgreSQL Cloud**
-
-**CI/CD**
-
-**Monitoring**
-
-**Logging**
-
-**```**
-
-
-
-**---**
-
-
-
-**# 🎯 Project Goal**
-
-
-
-**The long-term goal of Recovr is to evolve from a payment failure dashboard into an \*\*autonomous AI-driven revenue recovery platform\*\* capable of:**
-
-
-
-**```text**
-
-**Detect → Predict → Decide → Validate → Recover → Learn**
-
-**```**
-
-
-
-**---**
-
-
-
-**# 📌 Project Status**
-
-
-
-**\*\*Current Status:\*\* Active Development**
-
-
-
-**Recovr currently demonstrates the complete recovery decision pipeline from failed payment detection to intelligent recovery action execution and historical tracking.**
-
-
-
-**---**
-
-
-
-**# 👩‍💻 Author**
-
-
-
-**\*\*Swati Gupta\*\***
-
-
-
-**B.Tech — Information Technology**
-
-
-
-**GitHub: \[@13swati](https://github.com/13swati)**
-
-
-
-**---**
-
-
-
-**## ⭐ If you find this project interesting**
-
-
-
-**Consider giving the repository a star and following the project as it evolves.**
-
-
-
+Consider giving the repository a ⭐ on GitHub.
